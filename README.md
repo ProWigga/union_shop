@@ -2,7 +2,7 @@
 
 This repository contains the coursework project for students enrolled in the **Programming Applications and Programming Languages (M30235)** and **User Experience Design and Implementation (M32605)** modules at the University of Portsmouth.
 
-## Project Overview
+## Overview
 
 The Student Union has an e-commerce website, which you can access via this link: [https://shop.upsu.net](https://shop.upsu.net)
 
@@ -209,7 +209,7 @@ For questions or issues related to this coursework use [the dedicated Discord ch
 
 Use the worksheets listed on [the homepage](https://manighahrmani.github.io/sandwich_shop/) as your primary learning resource for Flutter development. You must refrain from using other online resources such as Stack Overflow, YouTube tutorials, or other websites for this coursework as they may contain outdated or incorrect information.
 
-## Important Git Tips
+## Tips
 
 **Commit regularly!** Save your progress frequently by committing your changes to Git. This creates checkpoints you can return to if needed.
 
