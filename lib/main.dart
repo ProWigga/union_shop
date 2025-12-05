@@ -257,16 +257,16 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSpacing: 48,
                       children: const [
                         ProductCard(
-                          title: 'University of Portsmouth Sweatshirt',
+                          title: 'University of Portsmouth HMS Victory Mug',
                           price: '£16.00',
                           originalPrice: "£22.00",
-                          imageUrl: 'assets/item1prgmCW.png',
+                          imageUrl: 'assets/itemlimited1prgmCW.png',
                         ),
                         ProductCard(
-                          title: 'University of Portsmouth T-Shirt',
+                          title: 'University of Portsmouth HMS Victory Hoodie',
                           price: '£23.00',
                           originalPrice: "£30.00",
-                          imageUrl: 'assets/item2prgmCW.png',
+                          imageUrl: 'assets/itemlimited2prgmCW.png',
                         ),
                       ],
                     ),
