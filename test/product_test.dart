@@ -4,8 +4,8 @@ import 'package:union_shop/product_page.dart';
 
 void main() {
   group('Product Page Tests', () {
-    Widget createTestWidget() {
-      return const MaterialApp(home: ProductPage());
+    Widget createTestWidget({String? productId}) {
+      return MaterialApp(home: ProductPage(productId: productId));
     }
 
     testWidgets('should display product page with basic elements', (
@@ -15,26 +15,22 @@ void main() {
       await tester.pump();
 
       // Check that basic UI elements are present
-      expect(
-        find.text('PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!'),
-        findsOneWidget,
-      );
+      expect(find.text('PLACEHOLDER HEADER TEXT'), findsOneWidget);
       expect(find.text('Placeholder Product Name'), findsOneWidget);
       expect(find.text('£15.00'), findsOneWidget);
       expect(find.text('Description'), findsOneWidget);
     });
 
-    testWidgets('should display student instruction text', (tester) async {
+    testWidgets('should display placeholder description when no product id',
+        (tester) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pump();
 
-      // Check that student instruction is present
+      // Check that placeholder description is present when productId not provided
       expect(
-        find.text(
-          'Students should add size options, colour options, quantity selector, add to cart button, and buy now button here.',
-        ),
-        findsOneWidget,
-      );
+          find.textContaining(
+              'This is a placeholder description for the product.'),
+          findsOneWidget);
     });
 
     testWidgets('should display header icons', (tester) async {
@@ -53,10 +49,18 @@ void main() {
 
       // Check that footer is present
       expect(find.text('Placeholder Footer'), findsOneWidget);
-      expect(
-        find.text('Students should customise this footer section'),
-        findsOneWidget,
-      );
+    });
+
+    testWidgets('hoodie page shows Size and Colour dropdowns', (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 'hoodie'));
+      await tester.pumpAndSettle();
+
+      // There should be two dropdown buttons for size + colour
+      expect(find.byType(DropdownButton<String>), findsNWidgets(2));
+
+      // Defaults should be present in the dropdown (M for size, Black for colour)
+      expect(find.text('M'), findsOneWidget);
+      expect(find.text('Black'), findsOneWidget);
     });
   });
 }

@@ -11,7 +11,7 @@ const Map<String, Map<String, String>> productCatalog = {
     'description':
         'A comfortable cotton hoodie with the University of Portsmouth logo. Machine washable and available in multiple sizes.',
   },
-    'cap': {
+  'cap': {
     'title': 'University of Portsmouth Hoodie',
     'price': '£30.00',
     'originalPrice': '£35.00',
@@ -20,10 +20,30 @@ const Map<String, Map<String, String>> productCatalog = {
         'A comfortable cotton hoodie with the University of Portsmouth logo. Machine washable and available in multiple sizes.',
   },
 };
-class ProductPage extends StatelessWidget {
+
+class ProductPage extends StatefulWidget {
   final String? productId;
 
   const ProductPage({super.key, this.productId});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  // hoodie options
+  final List<String> _availableSizes = ['XS', 'S', 'M', 'L', 'XL'];
+  final List<String> _availableColours = ['Black', 'Navy', 'Grey', 'White'];
+
+  String? _selectedSize;
+  String? _selectedColour;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedSize = _availableSizes[2];
+    _selectedColour = _availableColours[0];
+  }
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -35,10 +55,10 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, String>? product =
-        (productId != null && productCatalog.containsKey(productId))
-            ? productCatalog[productId]
-            : null;
+    final Map<String, String>? product = (widget.productId != null &&
+            productCatalog.containsKey(widget.productId))
+        ? productCatalog[widget.productId]
+        : null;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -282,6 +302,74 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
+
+                  // Hoodie options (size + colour) — only shown on hoodie product page
+                  if (product != null && widget.productId == 'hoodie')
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Options',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: InputDecorator(
+                                decoration: const InputDecoration(
+                                  labelText: 'Size',
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 4),
+                                  border: OutlineInputBorder(),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    value: _selectedSize,
+                                    isExpanded: true,
+                                    items: _availableSizes
+                                        .map((s) => DropdownMenuItem(
+                                            value: s, child: Text(s)))
+                                        .toList(),
+                                    onChanged: (v) =>
+                                        setState(() => _selectedSize = v),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: InputDecorator(
+                                decoration: const InputDecoration(
+                                  labelText: 'Colour',
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 4),
+                                  border: OutlineInputBorder(),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton<String>(
+                                    value: _selectedColour,
+                                    isExpanded: true,
+                                    items: _availableColours
+                                        .map((s) => DropdownMenuItem(
+                                            value: s, child: Text(s)))
+                                        .toList(),
+                                    onChanged: (v) =>
+                                        setState(() => _selectedColour = v),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    ),
+
                   if (product != null)
                     ElevatedButton(
                       onPressed: () {
