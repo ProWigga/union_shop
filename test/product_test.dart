@@ -64,5 +64,33 @@ void main() {
       expect(find.text('M'), findsOneWidget);
       expect(find.text('Black'), findsOneWidget);
     });
+
+    testWidgets('sweatshirt page shows Size and Colour dropdowns',
+        (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 'sweatshirt'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(DropdownButton<String>), findsNWidgets(2));
+      expect(find.text('M'), findsOneWidget);
+      expect(find.text('Black'), findsOneWidget);
+    });
+
+    testWidgets('t-shirt page shows Size and Colour dropdowns', (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 't-shirt'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(DropdownButton<String>), findsNWidgets(2));
+      expect(find.text('M'), findsOneWidget);
+      expect(find.text('Black'), findsOneWidget);
+    });
+
+    testWidgets('cap page shows Size and Colour dropdowns', (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 'cap'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(DropdownButton<String>), findsNWidgets(2));
+      expect(find.text('M'), findsOneWidget);
+      expect(find.text('Black'), findsOneWidget);
+    });
   });
 }

@@ -7,19 +7,36 @@ const Map<String, Map<String, String>> productCatalog = {
   'hoodie': {
     'title': 'University of Portsmouth Hoodie',
     'price': '£30.00',
-    'originalPrice': '£35.00',
+    'originalPrice': '£30.00',
     'imageUrl': 'assets/item3prgmCW.png',
     'description':
         'A comfortable cotton hoodie with the University of Portsmouth logo. Machine washable and available in multiple sizes.',
   },
   'cap': {
-    'title': 'University of Portsmouth Hoodie',
-    'price': '£30.00',
-    'originalPrice': '£35.00',
-    'imageUrl': 'assets/item3prgmCW.png',
+    'title': 'University of Portsmouth Cap',
+    'price': '£15.00',
+    'originalPrice': '£15.00',
+    'imageUrl': 'assets/item4prgmCW.png',
     'description':
-        'A comfortable cotton hoodie with the University of Portsmouth logo. Machine washable and available in multiple sizes.',
+        'Cool Cap, comes in multiple colours and sizes.',
   },
+    'sweatshirt': {
+    'title': 'University of Portsmouth Sweatshirt',
+    'price': '£25.00',
+    'originalPrice': '£25.00',
+    'imageUrl': 'assets/item1prgmCW.png',
+    'description':
+        'Warm Sweatshirt, comes in multiple colours and sizes. Washing machine safe.',
+  },
+  't-shirt': {
+    'title': 'University of Portsmouth T-Shirt',
+    'price': '£20.00',
+    'originalPrice': '£20.00',
+    'imageUrl': 'assets/item2prgmCW.png',
+    'description':
+        'Slick T-Shirt, comes in multiple colours and sizes. Washing machine safe.',
+  },
+
 };
 
 class ProductPage extends StatefulWidget {
@@ -35,6 +52,13 @@ class _ProductPageState extends State<ProductPage> {
   // hoodie options
   final List<String> _availableSizes = ['XS', 'S', 'M', 'L', 'XL'];
   final List<String> _availableColours = ['Black', 'Navy', 'Grey', 'White'];
+
+  final List<String> _signatureRangeIds = [
+    'sweatshirt',
+    't-shirt',
+    'hoodie',
+    'cap'
+  ];
 
   String? _selectedSize;
   String? _selectedColour;
@@ -304,8 +328,9 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                   const SizedBox(height: 24),
 
-                  // Hoodie options (size + colour) — only shown on hoodie product page
-                  if (product != null && widget.productId == 'hoodie')
+                  // Options (size + colour) — shown for all signature range product pages
+                  if (widget.productId != null &&
+                      _signatureRangeIds.contains(widget.productId))
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
