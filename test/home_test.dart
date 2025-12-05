@@ -44,7 +44,10 @@ void main() {
       await tester.pump();
 
       // Check that footer is present
-      expect(find.text('Placeholder Footer'), findsOneWidget);
+      expect(find.textContaining('Opening Hours'), findsOneWidget);
+      // Check for the dummy links
+      expect(find.text('Search'), findsOneWidget);
+      expect(find.text('Terms & Conditions'), findsOneWidget);
     });
 
     testWidgets('about us button navigates to about page', (tester) async {

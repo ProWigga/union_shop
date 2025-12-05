@@ -48,7 +48,9 @@ void main() {
       await tester.pump();
 
       // Check that footer is present
-      expect(find.text('Placeholder Footer'), findsOneWidget);
+      expect(find.textContaining('Opening Hours'), findsOneWidget);
+      expect(find.text('Search'), findsOneWidget);
+      expect(find.text('Terms & Conditions'), findsOneWidget);
     });
 
     testWidgets('hoodie page shows Size and Colour dropdowns', (tester) async {

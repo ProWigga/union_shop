@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 // Simple in-memory product catalog for demo purposes.
 // Keys are slugs used in the route, e.g. '/product/hoodie' -> slug 'hoodie'.
@@ -400,13 +401,54 @@ class _ProductPageState extends State<ProductPage> {
               width: double.infinity,
               color: Colors.grey[50],
               padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('Opening Hours',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                  const SizedBox(height: 8),
+                  const Text('❄️ Winter Break Closure Dates ❄️',
+                      style: TextStyle(fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 6),
+                  const Text('Closing 4pm 19/12/2025'),
+                  const Text('Reopening 10am 05/01/2026'),
+                  const Text('Last post date: 12pm on 18/12/2025'),
+                  const SizedBox(height: 8),
+                  const Divider(),
+                  const SizedBox(height: 8),
+                  const Text('(Term Time)',
+                      style: TextStyle(fontWeight: FontWeight.w600)),
+                  const Text('Monday - Friday 10am - 4pm'),
+                  const SizedBox(height: 6),
+                  const Text('(Outside of Term Time / Consolidation Weeks)',
+                      style: TextStyle(fontWeight: FontWeight.w600)),
+                  const Text('Monday - Friday 10am - 3pm'),
+                  const SizedBox(height: 8),
+                  const Text('Purchase online 24/7',
+                      style: TextStyle(fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 12),
+                  const Text('Help and Information',
+                      style: TextStyle(fontWeight: FontWeight.w700)),
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      TextButton(
+                        onPressed: () async {
+                          await launchUrlString('https://dummylink.co.uk');
+                        },
+                        child: const Text('Search'),
+                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        onPressed: () async {
+                          await launchUrlString('https://dummylink.co.uk');
+                        },
+                        child: const Text('Terms & Conditions'),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
