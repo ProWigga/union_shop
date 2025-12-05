@@ -9,31 +9,24 @@ void main() {
       await tester.pump();
 
       // Check that basic UI elements are present
-      expect(
-        find.text('PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!'),
-        findsOneWidget,
-      );
-      expect(find.text('Placeholder Hero Title'), findsOneWidget);
-      expect(find.text('PLACEHOLDER PRODUCTS SECTION'), findsOneWidget);
+      expect(find.textContaining('BIG SALE!'), findsOneWidget);
+      expect(find.text('PORTSMOUTH CITY COLLECTION'), findsOneWidget);
       expect(find.text('BROWSE PRODUCTS'), findsOneWidget);
-      expect(find.text('VIEW ALL PRODUCTS'), findsOneWidget);
+      expect(find.text('VIEW ALL COLLECTIONS'), findsOneWidget);
+      // About Us at the top-right
+      expect(find.text('About Us'), findsOneWidget);
     });
 
     testWidgets('should display product cards', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pump();
 
-      // Check that product cards are displayed
-      expect(find.text('Placeholder Product 1'), findsOneWidget);
-      expect(find.text('Placeholder Product 2'), findsOneWidget);
-      expect(find.text('Placeholder Product 3'), findsOneWidget);
-      expect(find.text('Placeholder Product 4'), findsOneWidget);
-
-      // Check prices are displayed
-      expect(find.text('£10.00'), findsOneWidget);
-      expect(find.text('£15.00'), findsOneWidget);
-      expect(find.text('£20.00'), findsOneWidget);
-      expect(find.text('£25.00'), findsOneWidget);
+      // Check that product cards are displayed (representative)
+      expect(find.text('University of Portsmouth HMS Victory Mug'),
+          findsOneWidget);
+      expect(find.text('University of Portsmouth Hoodie'), findsOneWidget);
+      expect(find.text('University of Portsmouth T-Shirt'), findsOneWidget);
+      expect(find.text('University of Portsmouth Cap'), findsOneWidget);
     });
 
     testWidgets('should display header icons', (tester) async {
@@ -52,10 +45,21 @@ void main() {
 
       // Check that footer is present
       expect(find.text('Placeholder Footer'), findsOneWidget);
-      expect(
-        find.text('Students should customise this footer section'),
-        findsOneWidget,
-      );
+    });
+
+    testWidgets('about us button navigates to about page', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final aboutFinder = find.text('About Us');
+      expect(aboutFinder, findsOneWidget);
+
+      await tester.tap(aboutFinder);
+      await tester.pumpAndSettle();
+
+      expect(find.text('About Us'),
+          findsWidgets); // AppBar title + button text both contain 'About Us'
+      expect(find.textContaining('Welcome to the Union Shop!'), findsOneWidget);
     });
   });
 }

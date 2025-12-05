@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
+import 'package:union_shop/collections_page.dart';
+import 'package:union_shop/about_page.dart';
 import 'package:union_shop/browse_page.dart';
 
 void main() {
@@ -45,6 +47,22 @@ class UnionShopApp extends StatelessWidget {
           final id = name.replaceFirst('/product/', '');
           return MaterialPageRoute(
             builder: (context) => ProductPage(productId: id),
+            settings: settings,
+          );
+        }
+
+        // Collections page route
+        if (name == '/collections') {
+          return MaterialPageRoute(
+            builder: (context) => const CollectionsPage(),
+            settings: settings,
+          );
+        }
+
+        // About page route
+        if (name == '/about') {
+          return MaterialPageRoute(
+            builder: (context) => const AboutPage(),
             settings: settings,
           );
         }
@@ -181,6 +199,20 @@ class HomeScreen extends StatelessWidget {
                                     minHeight: 32,
                                   ),
                                   onPressed: placeholderCallbackForButtons,
+                                ),
+                                // About Us text button at top-right
+                                TextButton(
+                                  onPressed: () =>
+                                      Navigator.pushNamed(context, '/about'),
+                                  style: TextButton.styleFrom(
+                                    foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
+                                    textStyle: const TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  child: const Text('About Us'),
                                 ),
                               ],
                             ),
@@ -374,7 +406,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      'PRODUCTS SECTION',
+                      'PORTSMOUTH CITY ITEMS',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.black,
@@ -420,6 +452,26 @@ class HomeScreen extends StatelessWidget {
                           routeName: '/product/placeholder-4',
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: ElevatedButton(
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/collections'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF4d2963),
+                          foregroundColor: Colors.white,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.zero,
+                          ),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 12),
+                          child: Text('VIEW ALL COLLECTIONS',
+                              style: TextStyle(letterSpacing: 1)),
+                        ),
+                      ),
                     ),
                   ],
                 ),
