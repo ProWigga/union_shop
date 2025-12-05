@@ -11,7 +11,8 @@ void main() {
       // Check that basic UI elements are present
       expect(find.textContaining('BIG SALE!'), findsOneWidget);
       expect(find.text('PORTSMOUTH CITY COLLECTION'), findsOneWidget);
-      expect(find.text('BROWSE PRODUCTS'), findsOneWidget);
+      // header button updated from 'BROWSE PRODUCTS' to 'VIEW ALL COLLECTIONS'
+      expect(find.text('BROWSE PRODUCTS'), findsNothing);
       expect(find.text('VIEW ALL COLLECTIONS'), findsOneWidget);
       // About Us at the top-right
       expect(find.text('About Us'), findsOneWidget);

@@ -307,7 +307,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(height: 32),
                         ElevatedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/browse');
+                            Navigator.pushNamed(context, '/collections');
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4d2963),
@@ -317,7 +317,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           child: const Text(
-                            'BROWSE PRODUCTS',
+                            'VIEW ALL COLLECTIONS',
                             style: TextStyle(fontSize: 14, letterSpacing: 1),
                           ),
                         ),
@@ -454,15 +454,13 @@ class HomeScreen extends StatelessWidget {
                           title: 'Portsmouth City Notebook',
                           price: '£7.00',
                           originalPrice: '£12.00',
-                          imageUrl:
-                              'assets/goodie2prgmCW.png',
+                          imageUrl: 'assets/goodie2prgmCW.png',
                           routeName: '/product/notebook',
                         ),
                         ProductCard(
                           title: 'Portsmouth City Magnet',
                           price: '£3.50',
-                          imageUrl:
-                              'assets/goodie1prgmCW.png',
+                          imageUrl: 'assets/goodie1prgmCW.png',
                           routeName: '/product/magnet_1',
                         ),
                         ProductCard(
@@ -475,31 +473,10 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Portsmouth City Bookmark',
                           price: '£2.50',
-                          imageUrl:
-                              'assets/goodie3prgmCW.png',
+                          imageUrl: 'assets/goodie3prgmCW.png',
                           routeName: '/product/bookmark',
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/collections'),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF4d2963),
-                          foregroundColor: Colors.white,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
-                          child: Text('VIEW ALL COLLECTIONS',
-                              style: TextStyle(letterSpacing: 1)),
-                        ),
-                      ),
                     ),
                   ],
                 ),
