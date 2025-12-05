@@ -21,7 +21,7 @@ class CollectionsPage extends StatelessWidget {
           children: const [
             ProductCard(
               title: 'Sales Collections',
-              price: 'From £9.99',
+              price: 'From £15.00',
               imageUrl: 'assets/item1prgmCW.png',
               routeName: '/collection/sales-collections',
             ),

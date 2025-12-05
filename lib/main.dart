@@ -451,33 +451,33 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSpacing: 48,
                       children: const [
                         ProductCard(
-                          title: 'Placeholder Product 1',
-                          price: '£14.99',
-                          originalPrice: '£20.00',
+                          title: 'Portsmouth City Notebook',
+                          price: '£7.00',
+                          originalPrice: '£12.00',
                           imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                          routeName: '/product/placeholder-1',
+                              'assets/goodie2prgmCW.png',
+                          routeName: '/product/notebook',
                         ),
                         ProductCard(
-                          title: 'Placeholder Product 2',
-                          price: '£15.00',
+                          title: 'Portsmouth City Magnet',
+                          price: '£3.50',
                           imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                          routeName: '/product/placeholder-2',
+                              'assets/goodie1prgmCW.png',
+                          routeName: '/product/magnet_1',
                         ),
                         ProductCard(
-                          title: 'Placeholder Product 3',
-                          price: '£20.00',
+                          title: 'Portsmouth City Magnet (Large)',
+                          price: '£5.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                          routeName: '/product/placeholder-3',
+                          routeName: '/product/magnet_2',
                         ),
                         ProductCard(
-                          title: 'Placeholder Product 4',
-                          price: '£25.00',
+                          title: 'Portsmouth City Bookmark',
+                          price: '£2.50',
                           imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                          routeName: '/product/placeholder-4',
+                              'assets/goodie3prgmCW.png',
+                          routeName: '/product/bookmark',
                         ),
                       ],
                     ),
