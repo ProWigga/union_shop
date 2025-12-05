@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
+import 'package:union_shop/product_card.dart';
 import 'package:union_shop/collections_page.dart';
 import 'package:union_shop/about_page.dart';
 import 'package:union_shop/browse_page.dart';
+import 'package:union_shop/sales_collections_page.dart';
+import 'package:union_shop/signature_range_page.dart';
+import 'package:union_shop/portsmouth_items_page.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 void main() {
@@ -56,6 +60,28 @@ class UnionShopApp extends StatelessWidget {
         if (name == '/collections') {
           return MaterialPageRoute(
             builder: (context) => const CollectionsPage(),
+            settings: settings,
+          );
+        }
+
+        // Collection detail routes
+        if (name == '/collection/sales-collections') {
+          return MaterialPageRoute(
+            builder: (context) => const SalesCollectionsPage(),
+            settings: settings,
+          );
+        }
+
+        if (name == '/collection/signature-range') {
+          return MaterialPageRoute(
+            builder: (context) => const SignatureRangePage(),
+            settings: settings,
+          );
+        }
+
+        if (name == '/collection/portsmouth-city-items') {
+          return MaterialPageRoute(
+            builder: (context) => const PortsmouthItemsPage(),
             settings: settings,
           );
         }
@@ -543,104 +569,4 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
-  final String title;
-  final String price;
-  final String imageUrl;
-  final String? originalPrice;
-  final String routeName;
-
-  const ProductCard({
-    super.key,
-    required this.title,
-    required this.price,
-    this.originalPrice,
-    required this.imageUrl,
-    this.routeName = '/product',
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, routeName);
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: imageUrl.startsWith('http')
-                ? Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        child: const Center(
-                          child: Icon(Icons.image_not_supported,
-                              color: Colors.grey),
-                        ),
-                      );
-                    },
-                  )
-                : Image.asset(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        child: const Center(
-                          child: Icon(Icons.image_not_supported,
-                              color: Colors.grey),
-                        ),
-                      );
-                    },
-                  ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
-              ),
-              const SizedBox(height: 4),
-              Builder(builder: (context) {
-                if (originalPrice != null) {
-                  return Row(
-                    children: [
-                      Text(
-                        originalPrice!,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
-                        ),
-                      ),
-                      const SizedBox(width: 8),
-                      Text(
-                        price,
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  );
-                }
-
-                return Text(
-                  price,
-                  style: const TextStyle(fontSize: 13, color: Colors.grey),
-                );
-              }),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
+// ProductCard moved to lib/product_card.dart
