@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
+import 'package:union_shop/browse_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -19,9 +20,41 @@ class UnionShopApp extends StatelessWidget {
       home: const HomeScreen(),
       // By default, the app starts at the '/' route, which is the HomeScreen
       initialRoute: '/',
-      // When navigating to '/product', build and return the ProductPage
-      // In your browser, try this link: http://localhost:49856/#/product
-      routes: {'/product': (context) => const ProductPage()},
+      // Use onGenerateRoute so we can map dynamic product routes like
+      // '/product/hms-victory-mug' to the ProductPage and pass the id/slug.
+      onGenerateRoute: (settings) {
+        final name = settings.name ?? '';
+        // Handle '/product' and '/product/' routes (generic product page)
+        if (name == '/product' || name == '/product/') {
+          return MaterialPageRoute(
+            builder: (context) => const ProductPage(),
+            settings: settings,
+          );
+        }
+
+        // Browse page route
+        if (name == '/browse') {
+          return MaterialPageRoute(
+            builder: (context) => const BrowsePage(),
+            settings: settings,
+          );
+        }
+
+        // Handle '/product/:id' style routes
+        if (name.startsWith('/product/')) {
+          final id = name.replaceFirst('/product/', '');
+          return MaterialPageRoute(
+            builder: (context) => ProductPage(productId: id),
+            settings: settings,
+          );
+        }
+
+        // Fallback to home
+        return MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+          settings: settings,
+        );
+      },
     );
   }
 }
@@ -213,7 +246,9 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 32),
                         ElevatedButton(
-                          onPressed: placeholderCallbackForButtons,
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/browse');
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4d2963),
                             foregroundColor: Colors.white,
@@ -261,12 +296,14 @@ class HomeScreen extends StatelessWidget {
                           price: '£16.00',
                           originalPrice: "£22.00",
                           imageUrl: 'assets/itemlimited1prgmCW.png',
+                          routeName: '/product/hms-victory-mug',
                         ),
                         ProductCard(
                           title: 'University of Portsmouth HMS Victory Hoodie',
                           price: '£23.00',
                           originalPrice: "£30.00",
                           imageUrl: 'assets/itemlimited2prgmCW.png',
+                          routeName: '/product/hms-victory-hoodie',
                         ),
                       ],
                     ),
@@ -303,21 +340,25 @@ class HomeScreen extends StatelessWidget {
                           title: 'University of Portsmouth Sweatshirt',
                           price: '£25.00',
                           imageUrl: 'assets/item1prgmCW.png',
+                          routeName: '/product/sweatshirt',
                         ),
                         ProductCard(
                           title: 'University of Portsmouth T-Shirt',
                           price: '£20.00',
                           imageUrl: 'assets/item2prgmCW.png',
+                          routeName: '/product/t-shirt',
                         ),
                         ProductCard(
                           title: 'University of Portsmouth Hoodie',
                           price: '£30.00',
                           imageUrl: 'assets/item3prgmCW.png',
+                          routeName: '/product/hoodie',
                         ),
                         ProductCard(
                           title: 'University of Portsmouth Cap',
                           price: '£15.00',
                           imageUrl: 'assets/item4prgmCW.png',
+                          routeName: '/product/cap',
                         ),
                       ],
                     ),
@@ -355,24 +396,28 @@ class HomeScreen extends StatelessWidget {
                           originalPrice: '£20.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          routeName: '/product/placeholder-1',
                         ),
                         ProductCard(
                           title: 'Placeholder Product 2',
                           price: '£15.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          routeName: '/product/placeholder-2',
                         ),
                         ProductCard(
                           title: 'Placeholder Product 3',
                           price: '£20.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          routeName: '/product/placeholder-3',
                         ),
                         ProductCard(
                           title: 'Placeholder Product 4',
                           price: '£25.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          routeName: '/product/placeholder-4',
                         ),
                       ],
                     ),
@@ -406,6 +451,7 @@ class ProductCard extends StatelessWidget {
   final String price;
   final String imageUrl;
   final String? originalPrice;
+  final String routeName;
 
   const ProductCard({
     super.key,
@@ -413,13 +459,14 @@ class ProductCard extends StatelessWidget {
     required this.price,
     this.originalPrice,
     required this.imageUrl,
+    this.routeName = '/product',
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/product');
+        Navigator.pushNamed(context, routeName);
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,7 +1,29 @@
 import 'package:flutter/material.dart';
 
+// Simple in-memory product catalog for demo purposes.
+// Keys are slugs used in the route, e.g. '/product/hoodie' -> slug 'hoodie'.
+const Map<String, Map<String, String>> productCatalog = {
+  'hoodie': {
+    'title': 'University of Portsmouth Hoodie',
+    'price': '£30.00',
+    'originalPrice': '£35.00',
+    'imageUrl': 'assets/item3prgmCW.png',
+    'description':
+        'A comfortable cotton hoodie with the University of Portsmouth logo. Machine washable and available in multiple sizes.',
+  },
+    'cap': {
+    'title': 'University of Portsmouth Hoodie',
+    'price': '£30.00',
+    'originalPrice': '£35.00',
+    'imageUrl': 'assets/item3prgmCW.png',
+    'description':
+        'A comfortable cotton hoodie with the University of Portsmouth logo. Machine washable and available in multiple sizes.',
+  },
+};
 class ProductPage extends StatelessWidget {
-  const ProductPage({super.key});
+  final String? productId;
+
+  const ProductPage({super.key, this.productId});
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -13,6 +35,11 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, String>? product =
+        (productId != null && productCatalog.containsKey(productId))
+            ? productCatalog[productId]
+            : null;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -137,7 +164,7 @@ class ProductPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Product image
+                  // Product image (use local asset if available in catalog, otherwise fallback)
                   Container(
                     height: 300,
                     width: double.infinity,
@@ -147,41 +174,73 @@ class ProductPage extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.grey[300],
-                            child: const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.image_not_supported,
-                                    size: 64,
-                                    color: Colors.grey,
+                      child: product != null
+                          ? (product['imageUrl']!.startsWith('http')
+                              ? Image.network(
+                                  product['imageUrl']!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      color: Colors.grey[300],
+                                      child: const Center(
+                                        child: Icon(Icons.image_not_supported,
+                                            size: 64, color: Colors.grey),
+                                      ),
+                                    );
+                                  },
+                                )
+                              : Image.asset(
+                                  product['imageUrl']!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      color: Colors.grey[300],
+                                      child: const Center(
+                                        child: Icon(Icons.image_not_supported,
+                                            size: 64, color: Colors.grey),
+                                      ),
+                                    );
+                                  },
+                                ))
+                          : Image.network(
+                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: Colors.grey[300],
+                                  child: const Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.image_not_supported,
+                                          size: 64,
+                                          color: Colors.grey,
+                                        ),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          'Image unavailable',
+                                          style: TextStyle(color: Colors.grey),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Image unavailable',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ],
-                              ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
                     ),
                   ),
 
                   const SizedBox(height: 24),
 
+                  // Product name (show id/slug if provided)
                   // Product name
-                  const Text(
-                    'Placeholder Product Name',
-                    style: TextStyle(
+                  Text(
+                    product != null
+                        ? product['title']!
+                        : 'Placeholder Product Name',
+                    style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
@@ -191,9 +250,9 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 12),
 
                   // Product price
-                  const Text(
-                    '£15.00',
-                    style: TextStyle(
+                  Text(
+                    product != null ? product['price']! : '£15.00',
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF4d2963),
@@ -212,14 +271,38 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
-                    style: TextStyle(
+                  Text(
+                    product != null
+                        ? product['description']!
+                        : 'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
                       height: 1.5,
                     ),
                   ),
+                  const SizedBox(height: 24),
+                  if (product != null)
+                    ElevatedButton(
+                      onPressed: () {
+                        // TODO: implement add-to-cart
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Added to cart')),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        foregroundColor: Colors.white,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.zero,
+                        ),
+                      ),
+                      child: const Padding(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        child: Text('Add to cart'),
+                      ),
+                    ),
                 ],
               ),
             ),
