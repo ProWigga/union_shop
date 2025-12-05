@@ -233,6 +233,48 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'ESSENTIAL RANGE - OVER 20% OFF!',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    const SizedBox(height: 48),
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount:
+                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                      crossAxisSpacing: 24,
+                      mainAxisSpacing: 48,
+                      children: const [
+                        ProductCard(
+                          title: 'University of Portsmouth Sweatshirt',
+                          price: '£16.00',
+                          originalPrice: "£22.00",
+                          imageUrl: 'assets/item1prgmCW.png',
+                        ),
+                        ProductCard(
+                          title: 'University of Portsmouth T-Shirt',
+                          price: '£23.00',
+                          originalPrice: "£30.00",
+                          imageUrl: 'assets/item2prgmCW.png',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
             // Clothes Section 2
             Container(
               color: Colors.white,
@@ -283,6 +325,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
+
             Container(
               color: Colors.white,
               child: Padding(
@@ -308,7 +351,8 @@ class HomeScreen extends StatelessWidget {
                       children: const [
                         ProductCard(
                           title: 'Placeholder Product 1',
-                          price: '£10.00',
+                          price: '£14.99',
+                          originalPrice: '£20.00',
                           imageUrl:
                               'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                         ),
@@ -361,11 +405,13 @@ class ProductCard extends StatelessWidget {
   final String title;
   final String price;
   final String imageUrl;
+  final String? originalPrice;
 
   const ProductCard({
     super.key,
     required this.title,
     required this.price,
+    this.originalPrice,
     required this.imageUrl,
   });
 
@@ -387,7 +433,8 @@ class ProductCard extends StatelessWidget {
                       return Container(
                         color: Colors.grey[300],
                         child: const Center(
-                          child: Icon(Icons.image_not_supported, color: Colors.grey),
+                          child: Icon(Icons.image_not_supported,
+                              color: Colors.grey),
                         ),
                       );
                     },
@@ -399,7 +446,8 @@ class ProductCard extends StatelessWidget {
                       return Container(
                         color: Colors.grey[300],
                         child: const Center(
-                          child: Icon(Icons.image_not_supported, color: Colors.grey),
+                          child: Icon(Icons.image_not_supported,
+                              color: Colors.grey),
                         ),
                       );
                     },
@@ -415,10 +463,36 @@ class ProductCard extends StatelessWidget {
                 maxLines: 2,
               ),
               const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
+              Builder(builder: (context) {
+                if (originalPrice != null) {
+                  return Row(
+                    children: [
+                      Text(
+                        originalPrice!,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        price,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Theme.of(context).colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  );
+                }
+
+                return Text(
+                  price,
+                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                );
+              }),
             ],
           ),
         ],
