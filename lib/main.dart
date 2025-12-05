@@ -233,7 +233,56 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Products Section
+            // Clothes Section 2
+            Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: Column(
+                  children: [
+                    const Text(
+                      'SIGNATURE RANGE',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    const SizedBox(height: 48),
+                    GridView.count(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount:
+                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
+                      crossAxisSpacing: 24,
+                      mainAxisSpacing: 48,
+                      children: const [
+                        ProductCard(
+                          title: 'University of Portsmouth Sweatshirt',
+                          price: '£25.00',
+                          imageUrl: 'assets/item1prgmCW.png',
+                        ),
+                        ProductCard(
+                          title: 'University of Portsmouth T-Shirt',
+                          price: '£20.00',
+                          imageUrl: 'assets/item2prgmCW.png',
+                        ),
+                        ProductCard(
+                          title: 'University of Portsmouth Hoodie',
+                          price: '£30.00',
+                          imageUrl: 'assets/item3prgmCW.png',
+                        ),
+                        ProductCard(
+                          title: 'University of Portsmouth Cap',
+                          price: '£15.00',
+                          imageUrl: 'assets/item4prgmCW.png',
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Container(
               color: Colors.white,
               child: Padding(
@@ -287,7 +336,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-
             // Footer
             Container(
               width: double.infinity,
@@ -331,18 +379,31 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+            child: imageUrl.startsWith('http')
+                ? Image.network(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: Icon(Icons.image_not_supported, color: Colors.grey),
+                        ),
+                      );
+                    },
+                  )
+                : Image.asset(
+                    imageUrl,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: Icon(Icons.image_not_supported, color: Colors.grey),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
