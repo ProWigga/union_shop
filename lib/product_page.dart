@@ -17,10 +17,9 @@ const Map<String, Map<String, String>> productCatalog = {
     'price': '£15.00',
     'originalPrice': '£15.00',
     'imageUrl': 'assets/item4prgmCW.png',
-    'description':
-        'Cool Cap, comes in multiple colours and sizes.',
+    'description': 'Cool Cap, comes in multiple colours and sizes.',
   },
-    'sweatshirt': {
+  'sweatshirt': {
     'title': 'University of Portsmouth Sweatshirt',
     'price': '£25.00',
     'originalPrice': '£25.00',
@@ -36,7 +35,53 @@ const Map<String, Map<String, String>> productCatalog = {
     'description':
         'Slick T-Shirt, comes in multiple colours and sizes. Washing machine safe.',
   },
+  'hms-victory-mug': {
+    'title': 'University of Portsmouth HMS Victory Mug',
+    'price': '£16.00',
+    'originalPrice': '£22.00',
+    'imageUrl': 'assets/itemlimited1prgmCW.png',
+    'description':
+        'A commemorative HMS Victory ceramic mug — microwave friendly and dishwasher safe.',
+  },
+  'hms-victory-hoodie': {
+    'title': 'University of Portsmouth HMS Victory Hoodie',
+    'price': '£23.00',
+    'originalPrice': '£30.00',
+    'imageUrl': 'assets/itemlimited2prgmCW.png',
+    'description':
+        'A limited edition HMS Victory hoodie — comfortable, warm, and features the commemorative print.',
+  },
 
+  // Portsmouth City items
+  'notebook': {
+    'title': 'Portsmouth City Notebook',
+    'price': '£7.00',
+    'originalPrice': '£12.00',
+    'imageUrl': 'assets/goodie2prgmCW.png',
+    'description':
+        'A handy Portsmouth City notebook — perfect for notes and campus life.',
+  },
+  'magnet_1': {
+    'title': 'Portsmouth City Magnet',
+    'price': '£3.50',
+    'imageUrl': 'assets/goodie1prgmCW.png',
+    'description':
+        'A small Portsmouth City magnet, perfect for fridges and lockers.',
+  },
+  'magnet_2': {
+    'title': 'Portsmouth City Magnet (Large)',
+    'price': '£5.00',
+    'imageUrl':
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    'description': 'A larger Portsmouth City magnet with a bold design.',
+  },
+  'bookmark': {
+    'title': 'Portsmouth City Bookmark',
+    'price': '£2.50',
+    'imageUrl': 'assets/goodie3prgmCW.png',
+    'description':
+        'A themed bookmark showcasing Portsmouth City – great for readers.',
+  },
 };
 
 class ProductPage extends StatefulWidget {
@@ -57,7 +102,8 @@ class _ProductPageState extends State<ProductPage> {
     'sweatshirt',
     't-shirt',
     'hoodie',
-    'cap'
+    'cap',
+    'hms-victory-hoodie'
   ];
 
   String? _selectedSize;

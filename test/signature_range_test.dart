@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/main.dart';
 
@@ -16,7 +17,9 @@ void main() {
       await tester.tap(find.text('Signature Range'));
       await tester.pumpAndSettle();
 
-      // Check that signature items are present on signature page
+      // Check that signature items are present on signature page (FilterChip removed)
+      expect(find.byType(DropdownButtonFormField<String>), findsNWidgets(2));
+      expect(find.byType(FilterChip), findsNothing);
       expect(find.text('University of Portsmouth Sweatshirt'), findsOneWidget);
       expect(find.text('University of Portsmouth T-Shirt'), findsOneWidget);
       expect(find.text('University of Portsmouth Hoodie'), findsOneWidget);

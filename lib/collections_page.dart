@@ -21,20 +21,20 @@ class CollectionsPage extends StatelessWidget {
           children: const [
             ProductCard(
               title: 'Sales Collections',
-              price: 'From £15.00',
-              imageUrl: 'assets/item1prgmCW.png',
+              price: 'From £16.00',
+              imageUrl: 'assets/itemlimited1prgmCW.png',
               routeName: '/collection/sales-collections',
             ),
             ProductCard(
               title: 'Signature Range',
-              price: 'From £19.99',
+              price: 'From £15.00',
               imageUrl: 'assets/item1prgmCW.png',
               routeName: '/collection/signature-range',
             ),
             ProductCard(
               title: 'Portsmouth City Items',
-              price: 'From £14.99',
-              imageUrl: 'assets/item1prgmCW.png',
+              price: 'From £2.50',
+              imageUrl: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
               routeName: '/collection/portsmouth-city-items',
             ),
           ],

@@ -92,5 +92,67 @@ void main() {
       expect(find.text('M'), findsOneWidget);
       expect(find.text('Black'), findsOneWidget);
     });
+
+    testWidgets('hms-victory-hoodie page shows Size and Colour dropdowns',
+        (tester) async {
+      await tester
+          .pumpWidget(createTestWidget(productId: 'hms-victory-hoodie'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(DropdownButton<String>), findsNWidgets(2));
+      expect(find.text('M'), findsOneWidget);
+      expect(find.text('Black'), findsOneWidget);
+    });
+
+    testWidgets('hms-victory-mug page shows populated info', (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 'hms-victory-mug'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('University of Portsmouth HMS Victory Mug'),
+          findsOneWidget);
+      expect(find.text('£16.00'), findsOneWidget);
+      expect(find.textContaining('commemorative HMS Victory ceramic mug'),
+          findsOneWidget);
+    });
+
+    testWidgets('notebook page shows populated info', (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 'notebook'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Portsmouth City Notebook'), findsOneWidget);
+      expect(find.text('£7.00'), findsOneWidget);
+      expect(find.textContaining('handy Portsmouth City notebook'),
+          findsOneWidget);
+    });
+
+    testWidgets('magnet_1 page shows populated info', (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 'magnet_1'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Portsmouth City Magnet'), findsOneWidget);
+      expect(find.text('£3.50'), findsOneWidget);
+      expect(
+          find.textContaining('small Portsmouth City magnet'), findsOneWidget);
+    });
+
+    testWidgets('magnet_2 page shows populated info', (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 'magnet_2'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Portsmouth City Magnet (Large)'), findsOneWidget);
+      expect(find.text('£5.00'), findsOneWidget);
+      expect(
+          find.textContaining('larger Portsmouth City magnet'), findsOneWidget);
+    });
+
+    testWidgets('bookmark page shows populated info', (tester) async {
+      await tester.pumpWidget(createTestWidget(productId: 'bookmark'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Portsmouth City Bookmark'), findsOneWidget);
+      expect(find.text('£2.50'), findsOneWidget);
+      expect(find.textContaining('themed bookmark showcasing Portsmouth City'),
+          findsOneWidget);
+    });
   });
 }
