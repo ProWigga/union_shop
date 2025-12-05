@@ -264,8 +264,8 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                          image: AssetImage(
+                            'assets/menuimageprgmCW.png',
                           ),
                           fit: BoxFit.cover,
                         ),
@@ -286,7 +286,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Text(
-                          'PORTSMOUTH CITY COLLECTION',
+                          'University of Portsmouth\nCollections',
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
@@ -296,7 +296,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         const Text(
-                          "City of Portsmouth themed goodies.",
+                          "City of Portsmouth themed merch.",
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.white,
